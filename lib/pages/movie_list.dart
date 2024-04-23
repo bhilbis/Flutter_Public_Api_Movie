@@ -4,7 +4,8 @@ import 'package:flutter_api_movie/service/http_service.dart';
 import 'package:flutter_api_movie/models/movie.dart';
 
 class MovieList extends StatefulWidget {
-  const MovieList({super.key});
+  final String category;
+  const MovieList({Key? key, required this.category}) : super(key: key);
 
   @override
   _MovieListState createState() => _MovieListState();
@@ -31,42 +32,76 @@ class _MovieListState extends State<MovieList> {
     });
   }
 
-  Future<void> fetchPopularMovies() async {
-    final List<Movie> value = await service.getPopularMovies();
-    setState(() {
-      movies = value;
-    });
-    }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Popular Movies"),
-      ),
       body: ListView.builder(
         itemCount: moviesCount,
         itemBuilder: (context, int position) {
-          return Card(
-              color: Colors.deepPurple[50],
+          return GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => MovieDetail(movies[position]),
+                ),
+              );
+            },
+            child: Card(
+              color: Colors.white,
               elevation: 2.0,
-              child: ListTile(
-                leading: Image.network(
-                  'https://image.tmdb.org/t/p/w500/${movies[position].posterPath}',
-                  width: 100,
-                  height: 100,
-                  fit: BoxFit.cover,
+              child: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(8.0),
+                      child: Image.network(
+                        'https://image.tmdb.org/t/p/w500/${movies[position].posterPath}',
+                        width: 150,
+                        height: 200,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    SizedBox(width: 16),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            movies[position].title,
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(height: 8),
+                          Row(
+                            children: [
+                              Icon(Icons.star, color: Colors.amber, size: 20),
+                              SizedBox(width: 4),
+                              Text(
+                                '${movies[position].voteAverage.toStringAsFixed(1)}/10',
+                                style: TextStyle(fontSize: 16),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 8),
+                          Text(
+                            'Overview: ${movies[position].overview}',
+                            maxLines: 3,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(fontSize: 14),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-                title: Text(movies[position].title),
-                subtitle: Text(
-                  'Rating = ${movies[position].voteAverage}',
-                ),
-                onTap: () {
-                  MaterialPageRoute route = MaterialPageRoute(
-                      builder: (_) => MovieDetail(movies[position]));
-                  Navigator.push(context, route);
-                },
-              ));
+              ),
+            ),
+          );
         },
       ),
     );

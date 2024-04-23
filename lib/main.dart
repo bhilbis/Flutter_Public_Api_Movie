@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_api_movie/pages/movie_list.dart';
+import 'package:flutter_api_movie/movie_bottom_bar.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(),
+      home: const MovieBottomBar(),
     );
   }
 }
@@ -26,6 +27,6 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MovieList();
+    return const MovieList(category: 'popular');
   }
 }
