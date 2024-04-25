@@ -49,11 +49,11 @@ class _MovieBottomBarState extends State<MovieBottomBar> {
   Widget _getPage(int index) {
     switch (index) {
       case 0:
-        return MovieList(category: 'popular');
+        return const MovieList(category: 'popular');
       case 1:
-        return MovieList(category: 'upcoming');
+        return const MovieList(category: 'upcoming');
       case 2:
-        return MovieList(category: 'top_rated');
+        return const MovieList(category: 'top_rated');
       default:
         return Container();
     }

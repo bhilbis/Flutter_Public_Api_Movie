@@ -37,6 +37,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   salomon_bottom_bar: ^3.3.2
   video_player: ^2.1.6
+  url_launcher: ^6.0.6
+  youtube_player_flutter: ^9.0.1
   http: ^1.2.0
 
 dev_dependencies:

@@ -5,6 +5,7 @@ class Movie {
   late String overview;
   late String posterPath;
   late String releaseDate;
+  // late String trailerKey;
 
   Movie(
     this.id,
@@ -13,6 +14,7 @@ class Movie {
     this.overview,
     this.posterPath,
     this.releaseDate,
+    // this.trailerKey,
   );
 
   Movie.fromJson(Map<String, dynamic> parsedJson) {
@@ -24,5 +26,6 @@ class Movie {
     overview = parsedJson['overview'];
     posterPath = parsedJson['poster_path'];
     releaseDate = parsedJson['release_date'];
+    // trailerKey = parsedJson['trailer_key'] ?? '';
   }
 }

@@ -8,7 +8,7 @@ class HttpService {
   final String baseUrl = 'https://api.themoviedb.org/3/movie/';
 
   Future<List<Movie>> getNowPlayingMovies() async {
-    final String uri = baseUrl + 'now_playing?api_key=' + apiKey;
+    final String uri = '${baseUrl}now_playing?api_key=$apiKey';
 
     http.Response result = await http.get(Uri.parse(uri));
     if (result.statusCode == HttpStatus.ok) {
@@ -25,7 +25,7 @@ class HttpService {
   }
 
   Future<List<Movie>> getTopRatedMovies() async {
-    final String uri = baseUrl + 'top_rated?api_key=' + apiKey;
+    final String uri = '${baseUrl}top_rated?api_key=$apiKey';
 
     http.Response result = await http.get(Uri.parse(uri));
     if (result.statusCode == HttpStatus.ok) {
@@ -42,7 +42,7 @@ class HttpService {
   }
 
   Future<List<Movie>> getPopularMovies() async {
-    final String uri = baseUrl + 'popular?api_key=' + apiKey;
+    final String uri = '${baseUrl}popular?api_key=$apiKey';
 
     http.Response result = await http.get(Uri.parse(uri));
     if (result.statusCode == HttpStatus.ok) {
@@ -59,7 +59,7 @@ class HttpService {
   }
 
   Future<List<Movie>> getUpcomingMovies() async {
-    final String uri = baseUrl + 'upcoming?api_key=' + apiKey;
+    final String uri = '${baseUrl}upcoming?api_key=$apiKey';
 
     http.Response result = await http.get(Uri.parse(uri));
     if (result.statusCode == HttpStatus.ok) {
